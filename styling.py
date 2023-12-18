@@ -1,8 +1,8 @@
 # ----------------------------------------------------------------------------
 # PAGE SETTINGS
 # ----------------------------------------------------------------------------
-app_title = 'AEOE Dashboard - 2023'
-page_title = 'AEOE 2023'
+app_title = 'California EE Providers'
+page_title = 'California EE Providers'
 sub_title = 'Filter on'
 filter_category_1 = 'Organization Data'
 filter_category_2 = 'Program Data'
