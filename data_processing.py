@@ -67,9 +67,15 @@ def merge_with_controlled_terms(df, controlled_terms_df, table_name, column_name
     display_terms['merge'] = display_terms['term'].str.lower().apply(lambda x: strip_x(x)) # strip whitespaces from entries
     merged_df = pd.merge(df, display_terms, how='left', on='merge')
 
-    # Drop merge column and fill NaN with 'No Data'
+    # # Drop merge column and fill NaN with 'No Data'
     merged_df = merged_df.drop(columns=['merge'])
-    merged_df = merged_df.fillna('No Data Entered')
+    # merged_df = merged_df.fillna('No Data Entered')
+
+   
+
+    # # Check for columns with only 'No Data Entered' and drop them
+    # columns_with_data = merged_df.columns[merged_df.apply(lambda col: col.nunique() > 1)].tolist()
+    # merged_df = merged_df[columns_with_data]
 
     return merged_df
 
