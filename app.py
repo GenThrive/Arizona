@@ -44,6 +44,7 @@ from make_components import *
 # ----------------------------------------------------------------------------
 
 overview_msg = html.Div([
+    
     html.H5(id='overview_msg')
 ])
 
@@ -120,7 +121,9 @@ test_div = html.Div()
 sidebar = html.Div(
     [
         html.H2(page_title),
+         html.Img(src='/assets/AEOE_logo_final_10_19_15.jpg', style={'height':'100px','width':'100%'}),
         html.H4(sub_title),
+       
         html.H5(filter_category_1),
         dds_orgs,
         html.H5(filter_category_2),
