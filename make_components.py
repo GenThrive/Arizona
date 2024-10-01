@@ -130,7 +130,9 @@ def make_groupby_pie_chart(df,col, groupby_column = 'Organization', textinfo = N
         # Get display names for column
         df = pd.DataFrame(df.groupby(col)[groupby_column].count())
         df.reset_index(level=0, inplace=True)
-        fig = px.pie(df, values=groupby_column, names=col, color_discrete_sequence=color_scale, title="{} grouped by {}s".format(col, groupby_column))
+        fig = px.pie(df, values=groupby_column, names=col, color_discrete_sequence=color_scale, 
+        title="{} grouped by {}s".format(col, groupby_column)
+        )
         fig.update_traces(textposition='inside', textinfo=textinfo)
         fig.update_layout(
                           #paper_bgcolor='rgba(190, 142, 146, 1)',
@@ -204,8 +206,8 @@ def make_map(orgdata, lat_col, lon_col, choro_geojson,  featureidkey, choro_df, 
     fig = px.choropleth_mapbox(choro_df, geojson=choro_geojson,
               featureidkey=featureidkey,
               locations=choro_df_location,
-              color=choro_df_value,
-              color_continuous_scale = map_color_scale,
+            #   color=choro_df_value,
+            #   color_continuous_scale = map_color_scale,
               opacity = 0.25,
                zoom=map_zoom,
               center = {"lat": map_center_lat, "lon": map_center_lon},
