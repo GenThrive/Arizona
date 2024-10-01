@@ -131,7 +131,7 @@ sidebar = html.Div(
         html.Div(id='div-overview_msg'),
         html.H6(['Powered by ',
                  html.A('Gen:Thrive ',
-                        href='https://genthrive.org/', target='blank', style={'text-decoration':'none'}),html.Img(src='/assets/faviconcopy.ico', style={'height':'15%', 'width':'15%'})], style={'padding-top':'10rem', 'padding-left':'10px', 'padding-right':'10px'}),
+                        href='https://genthrive.org/', target='blank', style={'text-decoration':'none'}),html.Img(src='/assets/faviconcopy.ico', style={'height':'15%', 'width':'15%'})], style={'padding-top':'1rem', 'padding-left':'10px', 'padding-right':'10px'}),
     ],
     style=SIDEBAR_STYLE,
 )
