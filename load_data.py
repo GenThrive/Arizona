@@ -23,7 +23,8 @@ import data_processing as dp
 ## Load data
 data_filepath = pathlib.Path(__file__).parent.absolute()
 data_dictionary_filepath = os.path.join(data_filepath,'data','data_dictionary.xls')
-data_records_filepath = os.path.join(data_filepath,'data','data_records.xls')
+# data_records_filepath = os.path.join(data_filepath,'data','data_records.xls')
+data_records_filepath = os.path.join(data_filepath,'data','modified_file.xlsx')
 us_states_geojson = os.path.join(data_filepath,'data','us_state_geojson.txt')
 tx_esc_geojson = os.path.join(data_filepath,'data','tx_esc.geojson')
 
@@ -143,6 +144,11 @@ for col in multiterm_prog_columns:
 
 data_dict = {}
 data_dict['Organizations'] = orgs.to_dict('records')
+duplicate_columns = orgs.columns[orgs.columns.duplicated()].tolist()
+if duplicate_columns:
+    print("Duplicate columns:", duplicate_columns)
+else:
+    print("No duplicate columns found.")
 data_dict['Programs'] = programs.to_dict('records')
 
 # ----------------------------------------------------------------------------
@@ -154,6 +160,9 @@ filter_dict = {}
 for org_or_prog in directory_df['table_name'].unique():
     col_to_display_map_df = directory_df[directory_df['table_name'] == org_or_prog][['column_name', 'display_name']].drop_duplicates()
     col_to_display_map_df = col_to_display_map_df.set_index('column_name')
+    # duplicates = col_to_display_map_df.index[col_to_display_map_df.index.duplicated()].tolist()
+
+    # print("Duplicate index values:", duplicates)
     col_to_display_map_dict = col_to_display_map_df.to_dict('index')
     filter_dict[org_or_prog] = col_to_display_map_dict
     for k in filter_dict[org_or_prog].keys():
