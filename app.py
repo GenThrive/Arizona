@@ -405,11 +405,30 @@ def build_piechart(data, input_piechart):
 
         # Set label type from pie_chart
         # use try / except to use the value from pie_format if it works, else just use the textinfo = None
+
+        value_colors = {
+        '20-39%': '#00A887',  # Assign color to 'Value1'
+        '40-59%': '#B9D535',  # Assign color to 'Value2'
+        '80-100%': '#FFC600',  # Assign color to 'Value3'
+        "60-79%": '#FF8F12',  # Assign color to 'Value4'
+        "1-19%": '#FF664B', # Assign color to 'Value5'
+        # Add other specific value-color pairs as needed
+    }
+    
+    # Map colors based on values in pie_data; use color_scale for any unspecified values
+        color_dict = {val: value_colors.get(val, eco_color[i % len(eco_color)]) for i, val in enumerate(pie_data[name_col].unique())} 
+
         try:
-            pie_format = directory_df.loc[(directory_df['table_name']==table_name) & (directory_df['column_name']==input_piechart) ]['pie_format'].values[0]
-            pie_chart = make_pie_chart(pie_data, name_col, value_col, title = pie_title, color_scale = eco_color, showlegend=True, textinfo=pie_format)
+            pie_format = directory_df.loc[
+            (directory_df['table_name'] == table_name) & (directory_df['column_name'] == input_piechart)
+            ]['pie_format'].values[0]
+            pie_chart = make_pie_chart(
+            pie_data, name_col, value_col, title=pie_title, color_dict=color_dict, color_scale=eco_color, showlegend=True, textinfo=pie_format
+        )
         except:
-            pie_chart = make_pie_chart(pie_data, name_col, value_col, title = pie_title, color_scale = eco_color, showlegend=True)
+            pie_chart = make_pie_chart(
+            pie_data, name_col, value_col, title=pie_title, color_dict=color_dict, color_scale=eco_color, showlegend=True
+        )
 
         return  pie_chart
     # except:

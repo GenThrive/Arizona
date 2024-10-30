@@ -30,7 +30,7 @@ with pd.ExcelWriter('data/modified_file.xlsx', engine='openpyxl') as writer:
                 if df[column].dtype == 'object':  # Check if the column is of string type
                     df[column] = df[column].apply(lambda x: x.replace(",", ", ") if isinstance(x, str) else x)
                 
-                    df[column] = df[column].apply(lambda x: x.replace('1-19', '1-19%')if isinstance(x, str) else x)
+                    df[column] = df[column].apply(lambda x: x.replace('2024-01-19 00:00:00', '1-19%')if isinstance(x, str) else x)
                     
                     df[column] = df[column].apply(lambda x: x.replace('20-39', '20-39%')if isinstance(x, str) else x)
                     

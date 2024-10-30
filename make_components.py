@@ -143,19 +143,31 @@ def make_groupby_pie_chart(df,col, groupby_column = 'Organization', textinfo = N
                           )
         return fig
 
-def make_pie_chart(df, name_col, value_col, title=None, textinfo = None, color_scale = None, showlegend=False ):
+def make_pie_chart(df, name_col, value_col, title=None, textinfo = None, color_scale=eco_color, color_dict=None, showlegend=False ):
     if df.empty:
         return no_data_fig()
     else:
-        fig = px.pie(df, values=value_col, names=name_col, color_discrete_sequence=color_scale, title=title)
+        # fig = px.pie(df, values=value_col, names=name_col, color_discrete_sequence=color_scale, title=title)
+        # fig.update_traces(textposition='inside', textinfo=textinfo)
+        # fig.update_layout(
+        #                   #paper_bgcolor='rgba(190, 142, 146, 1)',
+        #                   showlegend=showlegend,
+        #                   #height=300,
+        #                   #showlegend=False,
+        #                   margin=dict(l=1, r=1, b=0),
+        #                   )
+         # Use color_dict if available, else use the custom color_scale
+        if color_dict:
+            fig = px.pie(df, values=value_col, names=name_col, title=title,)
+            fig.for_each_trace(lambda trace: trace.update(marker=dict(colors=[color_dict.get(name, color_scale[i % len(color_scale)]) for i, name in enumerate(df[name_col])])))
+        else:
+            fig = px.pie(df, values=value_col, names=name_col, title=title, color_discrete_sequence=color_scale)
+
         fig.update_traces(textposition='inside', textinfo=textinfo)
         fig.update_layout(
-                          #paper_bgcolor='rgba(190, 142, 146, 1)',
-                          showlegend=showlegend,
-                          #height=300,
-                          #showlegend=False,
-                          margin=dict(l=1, r=1, b=0),
-                          )
+            showlegend=showlegend,
+            margin=dict(l=1, r=1, b=0)
+        )
         return fig
 
 # APP Functions

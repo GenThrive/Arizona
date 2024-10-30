@@ -31,7 +31,7 @@ data_area_col = 'ESC'
 fulltint = ['#00A887','#B9D535','#FFC600','#FF8F12','#FF664B']
 tint_75 = ['#40BEA5','#CBE068','#FFC400','#FFAB4D','#FF8C78']
 tint_50 = ['#80D4C3','#DCEA9A','#FFE380','#FFC789','#FFB3A5']
-eco_color = fulltint + tint_75 + tint_50
+
 eco_color = fulltint + tint_75 + tint_50
 eco_color_r = fulltint[::-1] + tint_75[::-1] + tint_50[::-1]
 eco_color_desc = eco_color[::-1]
