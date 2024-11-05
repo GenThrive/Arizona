@@ -407,13 +407,28 @@ def build_piechart(data, input_piechart):
         # use try / except to use the value from pie_format if it works, else just use the textinfo = None
 
         value_colors = {
+        "1-19%": '#FF664B', # Assign color to 'Value5'
         '20-39%': '#00A887',  # Assign color to 'Value1'
         '40-59%': '#B9D535',  # Assign color to 'Value2'
-        '80-100%': '#FFC600',  # Assign color to 'Value3'
         "60-79%": '#FF8F12',  # Assign color to 'Value4'
-        "1-19%": '#FF664B', # Assign color to 'Value5'
-        # Add other specific value-color pairs as needed
-    }
+        '80-100%': '#FFC600',  # Assign color to 'Value3'
+        "We don't know": '#FF8C78',
+        }
+        # Define preferred order for the values
+        # preferred_order = ['1-19%', '20-39%', '40-59%', '60-79%', '80-100%'] if input_piechart == 'some_column_with_defined_order' else None
+
+        column_order_dict = {
+        'Full-Time_BIPOC': ['1-19%', '20-39%', '40-59%', '60-79%', '80-100%',"We don't know"],  
+        'Senior_Staff_BIPOC': ['1-19%', '20-39%', '40-59%', '60-79%', '80-100%',"We don't know"],
+        'Board_BIPOC': ['1-19%', '20-39%', '40-59%', '60-79%', '80-100%', "We don't know"],
+        'LGBTQIA_Staff': ['1-19%', '20-39%', '40-59%', '60-79%', '80-100%', "We don't know"],'LGBTQIA_Senior_Staff': ['1-19%', '20-39%', '40-59%', '60-79%', '80-100%', "We don't know"],'LGBTQIA_Board_Directors': ['1-19%', '20-39%', '40-59%', '60-79%', '80-100%', "We don't know"]
+}
+        
+        preferred_order = column_order_dict.get(input_piechart)
+        # Sort pie_data by preferred_order
+        if preferred_order:
+            pie_data[name_col] = pd.Categorical(pie_data[name_col], categories=preferred_order, ordered=False)
+            pie_data = pie_data.sort_values(by=name_col)
     
     # Map colors based on values in pie_data; use color_scale for any unspecified values
         color_dict = {val: value_colors.get(val, eco_color[i % len(eco_color)]) for i, val in enumerate(pie_data[name_col].unique())} 
@@ -421,13 +436,13 @@ def build_piechart(data, input_piechart):
         try:
             pie_format = directory_df.loc[
             (directory_df['table_name'] == table_name) & (directory_df['column_name'] == input_piechart)
-            ]['pie_format'].values[0]
+            ]['pie_format'].values[0].replace(" ", "")
             pie_chart = make_pie_chart(
             pie_data, name_col, value_col, title=pie_title, color_dict=color_dict, color_scale=eco_color, showlegend=True, textinfo=pie_format
         )
         except:
             pie_chart = make_pie_chart(
-            pie_data, name_col, value_col, title=pie_title, color_dict=color_dict, color_scale=eco_color, showlegend=True
+            pie_data, name_col, value_col, title=pie_title, color_dict=color_dict, color_scale=eco_color, showlegend=True, 
         )
 
         return  pie_chart
