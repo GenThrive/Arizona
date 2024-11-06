@@ -1,8 +1,8 @@
 # ----------------------------------------------------------------------------
 # PAGE SETTINGS
 # ----------------------------------------------------------------------------
-app_title = 'California Enviromental Education'
-page_title = 'California Enviromental Education'
+app_title = 'Arizona Enviromental Education'
+page_title = 'Arizona Enviromental Education'
 sub_title = 'Filter on'
 filter_category_1 = 'Organization Data'
 filter_category_2 = 'Program Data'
@@ -10,9 +10,9 @@ filter_category_2 = 'Program Data'
 # ----------------------------------------------------------------------------
 # MAP SETTINGS
 # ----------------------------------------------------------------------------
-map_center_lat = 37.2691675
-map_center_lon = -119.306607
-map_zoom = 4
+map_center_lat = 34.1397747
+map_center_lon = -114.5704303
+map_zoom = 5
 
 # Column in the dataset that maps to the featureidkey of the geojson.
 # This is what maps the data column to the geojson feature
